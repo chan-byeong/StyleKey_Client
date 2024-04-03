@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://dev.stylekey.shop',
+  baseURL: ' https://www.stylekey.shop',
   withCredentials: true,
 });
 
