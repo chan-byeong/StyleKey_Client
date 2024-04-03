@@ -5,7 +5,7 @@ import stylekeylogo from '../images/stylekeylogo.png';
 export const NavBar2 = styled.div`
   position: fixed;
   width: 100%;
-  z-index: 1000;
+  z-index: 98;
   height: 70px;
   background-color: white;
 `;
@@ -16,7 +16,7 @@ export const NavBar = styled.div`
   width: calc(100% - 32px);
   left: 16px;
   right: 16px;
-  z-index: 1000;
+  z-index: 98;
   display: flex;
   flex-direction: row;
   align-items: center;
