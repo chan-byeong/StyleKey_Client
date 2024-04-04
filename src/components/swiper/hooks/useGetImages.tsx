@@ -1,14 +1,29 @@
-import { useQuery } from '@tanstack/react-query';
-import { getStyleImages } from '../../../util/http';
+import { useSuspenseQuery } from '@tanstack/react-query';
+
+import request from '../../../api/api';
+import { queryKeys } from '../../common/queryKeys';
+
+interface StyleImageType {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+}
+
+async function getStyleImages() {
+  const response = await request<null, null, StyleImageType[]>({
+    url: '/api/style-points',
+    method: 'get',
+  });
+  return response.data;
+}
 
 const useGetImages = () => {
-  const queryResult = useQuery({
-    queryKey: ['styleimages'],
+  const { data } = useSuspenseQuery({
+    queryKey: [queryKeys.styleImages],
     queryFn: getStyleImages,
-    staleTime: 600000,
-    gcTime: 600000,
   });
-  return queryResult;
+  return { data };
 };
 
 export default useGetImages;

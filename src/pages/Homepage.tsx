@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, { Suspense, useRef } from 'react';
 import * as Ho from '../components/HomePage/styles/Homepage.styles';
 import MobileLayout from '../components/common/Layout';
+import Loading from '../components/common/Loading';
 
 import DownButton from '../components/HomePage/images/Downbutton.svg';
 import Slide from '../components/swiper/Swiper';
@@ -34,7 +35,9 @@ const Homepage: React.FC = () => {
       <Ho.HomeContainer>
         <Ho.HomeTop>
           <Ho.Container>
-            <Slide />
+            <Suspense fallback={<Loading />}>
+              <Slide />
+            </Suspense>
           </Ho.Container>
         </Ho.HomeTop>
         <Ho.HomeMiddle>
