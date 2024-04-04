@@ -5,7 +5,7 @@ import GlobalStyle from './styles/GlobalStyle';
 import Header from './components/header/Header.tsx';
 import Homepage from './pages/Homepage.tsx';
 import RedirectPage from './components/loginpage/Redirect.tsx';
-import Login from './pages/Login.tsx';
+import LoginPage from './pages/LoginPage.tsx';
 import Mypage from './pages/Mypage.tsx';
 import ResultPage from './pages/ResultPage.tsx';
 import TestStartPage from './pages/TestStartpage.tsx';
@@ -41,7 +41,7 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Homepage />}></Route>
-              <Route path="/login" element={<Login />}></Route>
+              <Route path="/login" element={<LoginPage />}></Route>
               <Route path="/mypage">
                 <Route index element={<Mypage />} />
                 <Route path="/mypage/history" />

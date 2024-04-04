@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Caption } from '../../../components/common/Common';
+import kakao_img from '../images/Kakaotalk.png';
+import google_img from '../images/Google.png';
 
 export const ImgContainer = styled.img`
   height: 143.5px;
@@ -45,9 +47,29 @@ export const LoginButton = styled.button`
 
 export const KakaoButton = styled(LoginButton)`
   background-color: #fae100;
+  &::before {
+    content: '';
+    display: block;
+    width: 26px;
+    height: 26px;
+    background-image: url(${kakao_img});
+    background-size: contain;
+    position: absolute;
+    left: 25px;
+  }
 `;
 
 export const GoogleButton = styled(LoginButton)`
   background-color: #fff;
   border: 1px solid black;
+  &::before {
+    content: '';
+    display: block;
+    width: 26px;
+    height: 26px;
+    background-image: url(${google_img});
+    background-size: contain;
+    position: absolute;
+    left: 25px;
+  }
 `;
