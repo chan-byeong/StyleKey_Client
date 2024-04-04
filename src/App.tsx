@@ -21,7 +21,15 @@ const CenteredContainer = styled.div`
   position: relative;
 `;
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+      staleTime: 600 * 1000,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function App() {
   return (
