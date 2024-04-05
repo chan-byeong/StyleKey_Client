@@ -1,6 +1,6 @@
 import MobileLayout from '../common/Layout';
-import * as L from '..//loginpage/styles/Login.style';
-import stylekeylogo from '../components/loginpage/images/stylekeymark.png';
+import * as L from './styles/Login.style';
+import stylekeylogo from './images/stylekeymark.png';
 import { Caption, Text } from '../common/Common';
 
 function Login() {
@@ -24,8 +24,10 @@ function Login() {
       </Text>
       <L.ButtonContainer>
         <L.SnsCaption> SNS 계정으로 로그인</L.SnsCaption>
-        <L.KakaoButton onClick={handleKakaoLogin} />
-        <L.GoogleButton onClick={handleGoogleLogin} />
+        <L.KakaoButton onClick={handleKakaoLogin}>KAKAO로 로그인</L.KakaoButton>
+        <L.GoogleButton onClick={handleGoogleLogin}>
+          GOOGLE로 로그인
+        </L.GoogleButton>
       </L.ButtonContainer>
     </MobileLayout>
   );
