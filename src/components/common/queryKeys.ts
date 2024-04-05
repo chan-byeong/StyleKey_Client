@@ -1,3 +1,4 @@
 export const queryKeys = {
-  styleImages: 'styleImages',
+  styleImages: 'style_images',
+  testResults: 'test_results',
 };
