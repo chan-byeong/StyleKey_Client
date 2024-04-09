@@ -1,4 +1,6 @@
 import React, { Suspense, useRef } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+
 import * as Ho from '../components/HomePage/styles/Homepage.styles';
 import MobileLayout from '../components/common/Layout';
 import Loading from '../components/common/Loading';
@@ -35,9 +37,11 @@ const Homepage: React.FC = () => {
       <Ho.HomeContainer>
         <Ho.HomeTop>
           <Ho.Container>
-            <Suspense fallback={<Loading />}>
-              <Slide />
-            </Suspense>
+            <ErrorBoundary fallback={<h1>Error</h1>}>
+              <Suspense fallback={<Loading />}>
+                <Slide />
+              </Suspense>
+            </ErrorBoundary>
           </Ho.Container>
         </Ho.HomeTop>
         <Ho.HomeMiddle>
