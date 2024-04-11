@@ -10,6 +10,38 @@ import PrevButton from './images/Prev.svg';
 import React from 'react';
 import { requestPost } from '../../util/http';
 
+interface Answer {
+  answer_id: number;
+  content: string;
+}
+
+interface TestQuestion {
+  question_id: number;
+  content: string;
+  image_url: string;
+  answers: Answer[];
+}
+
+function createTestData() {
+  let data = [];
+  for (let i = 0; i < 8; i++) {
+    let ai = i * 4;
+    data.push({
+      question_id: i,
+      content: 'OOO일 때 어떻게 하시나요? ' + i,
+      image_url: 'https://example.com/image' + i + '.png',
+      answers: [
+        { answer_id: ai + 0, content: '나는 어쩌구 저쩌구 합니다. ' + i },
+        { answer_id: ai + 1, content: '나는 어쩌구 저쩌구 합니다. ' + i },
+        { answer_id: ai + 2, content: '나는 어쩌구 저쩌구 합니다. ' + i },
+        { answer_id: ai + 3, content: '나는 어쩌구 저쩌구 합니다. ' + i },
+      ],
+    });
+  }
+  return data;
+}
+const TEMP: TestQuestion[] = createTestData();
+
 export default function TestBox() {
   const navigate = useNavigate();
 
@@ -23,45 +55,41 @@ export default function TestBox() {
     ));
   }
 
-  const { data: responseData, isLoading, isError } = useGetTest();
+  // const { data: responseData, isLoading, isError } = useGetTest();
+  const responseData = TEMP;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [showQuestion, setShowQuestion] = useState(true);
 
   useEffect(() => {
-    if (responseData && responseData.data && responseData.data.length > 0) {
+    if (responseData.length > 0) {
       setIsDataLoaded(true);
     }
   }, [responseData]);
 
   useEffect(() => {
-    if (
-      responseData &&
-      responseData.data &&
-      currentQuestionIndex < responseData.data.length - 1
-    ) {
+    if (responseData && currentQuestionIndex < responseData.length - 1) {
       const nextQuestionImage = new Image();
-      nextQuestionImage.src =
-        responseData.data[currentQuestionIndex + 1].image_url;
+      nextQuestionImage.src = responseData[currentQuestionIndex + 1].image_url;
     }
   }, [currentQuestionIndex, responseData]);
 
-  if (isLoading || !isDataLoaded) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading || !isDataLoaded) {
+  //   return <div>Loading...</div>;
+  // }
 
-  if (isError) {
-    return <div>질문지를 불러오는데 에러가 발생했습니다.</div>;
-  }
+  // if (isError) {
+  //   return <div>질문지를 불러오는데 에러가 발생했습니다.</div>;
+  // }
 
-  const currentQuestion = responseData.data[currentQuestionIndex] || {
+  const currentQuestion = responseData[currentQuestionIndex] || {
     content: '',
     answers: [],
   };
 
-  const progress = responseData.data
-    ? (currentQuestionIndex / (responseData.data.length - 1)) * 100
+  const progress = responseData
+    ? (currentQuestionIndex / (responseData.length - 1)) * 100
     : 0;
 
   const handleSelectAnswer = (answerId: number) => {
@@ -69,7 +97,7 @@ export default function TestBox() {
     updatedAnswers[currentQuestionIndex] = answerId;
     setSelectedAnswers(updatedAnswers);
 
-    if (currentQuestionIndex < responseData.data.length - 1) {
+    if (currentQuestionIndex < responseData.length - 1) {
       // 먼저 질문을 숨기고
       setShowQuestion(false);
 
@@ -109,7 +137,7 @@ export default function TestBox() {
   };
 
   const goToNextQuestion = () => {
-    if (currentQuestionIndex < responseData.data.length - 1) {
+    if (currentQuestionIndex < responseData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
@@ -123,7 +151,7 @@ export default function TestBox() {
               Q{currentQuestionIndex + 1}
             </Text>
             <Text $fontSize={12} $fontWeight={400}>
-              {currentQuestionIndex + 1}/{responseData.data.length}
+              {currentQuestionIndex + 1}/{responseData.length}
             </Text>
           </T.TestNumberText>
 
@@ -153,10 +181,9 @@ export default function TestBox() {
             alt="다음"
             onClick={goToNextQuestion}
             style={{
-              opacity:
-                currentQuestionIndex === responseData.data.length - 1 ? 0 : 1,
+              opacity: currentQuestionIndex === responseData.length - 1 ? 0 : 1,
               pointerEvents:
-                currentQuestionIndex === responseData.data.length - 1
+                currentQuestionIndex === responseData.length - 1
                   ? 'none'
                   : 'auto',
             }}

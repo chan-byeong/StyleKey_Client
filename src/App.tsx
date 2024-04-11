@@ -14,6 +14,7 @@ import TestPage from './pages/TestPage.tsx';
 
 // TEMP
 import LikePage from './components/Mypage/LikePage/LikePage.tsx';
+import Tests from './components/TestPage/Tests.tsx';
 
 const CenteredContainer = styled.div`
   max-width: 390px; // 최대 가로 길이 (피그마에 있는 대로)
@@ -51,7 +52,7 @@ function App() {
               <Route path="/oauth/redirect" element={<RedirectPage />} />
               <Route path="/teststart" element={<TestStartPage />} />
               <Route path="/test" element={<TestPage />} />
-              <Route path="/test" />
+              <Route path="/test_temp" element={<Tests />} />
               <Route path="/result" element={<ResultPage />} />
               <Route path="/points">
                 <Route path="/points/detail">
