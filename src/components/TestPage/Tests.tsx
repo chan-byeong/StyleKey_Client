@@ -49,7 +49,7 @@ function Tests() {
     if (scrollToRef.current) {
       scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [answers]);
+  }, [Object.keys(answers).length]);
 
   const handleAnswerSelect = (question_id: number, select: number) => {
     setAnswers((pre) => ({ ...pre, [question_id]: select }));
@@ -90,8 +90,16 @@ function Tests() {
 export default Tests;
 
 const Wrapper = styled.div`
+  /* height: 90vh; */
+  /* width: 100%; */
+  /* flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center; */
   padding-bottom: 50px;
+  overflow: hidden;
 `;
+
 const ProgessBtn = styled.button`
   width: 100%;
   height: 50px;
