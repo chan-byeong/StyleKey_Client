@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 import EachTest from './EachTest';
 import MobileLayout from '../common/Layout';
+
+interface Answers {
+  [id: number]: number;
+}
 
 interface Answer {
   answer_id: number;
@@ -37,10 +41,19 @@ function createTestData() {
 const TEMP: TestQuestion[] = createTestData();
 
 function Tests() {
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState<Answers>({});
+  const scrollToRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Whenever the component updates, scroll the referenced component into view
+    if (scrollToRef.current) {
+      scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [answers]);
 
   const handleAnswerSelect = (question_id: number, select: number) => {
     setAnswers((pre) => ({ ...pre, [question_id]: select }));
+    console.log(answers);
   };
 
   const AllAnswered = Object.keys(answers).length === 8;
@@ -49,11 +62,15 @@ function Tests() {
     <MobileLayout>
       <Wrapper>
         {TEMP.map((el, idx) => {
+          let isDisplay =
+            idx === 0 ? true : !!(answers[el.question_id - 1] + 1);
           return (
             <EachTest
               handleSelect={handleAnswerSelect}
               question={el}
               key={idx}
+              display={isDisplay}
+              ref={isDisplay ? scrollToRef : null}
             />
           );
         })}

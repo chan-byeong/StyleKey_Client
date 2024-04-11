@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import styled from 'styled-components';
 
 import { Text } from '../common/Common';
@@ -18,38 +18,43 @@ interface TestQuestion {
 interface EachTestProps {
   question: TestQuestion;
   handleSelect: (id: number, ans: number) => void;
+  display?: boolean;
 }
 
 // TODO: props로 질문 내용 받기
-function EachTest({ question, handleSelect }: EachTestProps) {
-  const [selected, isSelected] = useState(-1);
+const EachTest = forwardRef<HTMLDivElement, EachTestProps>(
+  ({ question, handleSelect, display }, ref) => {
+    const [selected, isSelected] = useState(-1);
 
-  return (
-    <TextBox>
-      <Text $fontSize={18} $fontWeight={600} $marginBottom={12}>
-        {question.content}
-      </Text>
-      {question.answers.map((el) => {
-        return (
-          <AnsBox
-            onClick={() => {
-              handleSelect(question.question_id, el.answer_id);
-              isSelected(el.answer_id);
-            }}
-            key={el.answer_id}
-            $selected={el.answer_id === selected}
-          >
-            {el.content}
-          </AnsBox>
-        );
-      })}
-    </TextBox>
-  );
-}
+    return (
+      display && (
+        <TestBox ref={display ? ref : null}>
+          <Text $fontSize={18} $fontWeight={600} $marginBottom={12}>
+            {question.content}
+          </Text>
+          {question.answers.map((el) => {
+            return (
+              <AnsBox
+                onClick={() => {
+                  handleSelect(question.question_id, el.answer_id);
+                  isSelected(el.answer_id);
+                }}
+                key={el.answer_id}
+                $selected={el.answer_id === selected}
+              >
+                {el.content}
+              </AnsBox>
+            );
+          })}
+        </TestBox>
+      )
+    );
+  },
+);
 
 export default EachTest;
 
-const TextBox = styled.div`
+const TestBox = styled.div`
   margin: 20px 0;
 `;
 
