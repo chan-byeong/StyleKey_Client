@@ -11,6 +11,7 @@ export const NavBar2 = styled.div`
 `;
 
 export const NavBar = styled.div`
+  box-sizing: border-box;
   position: fixed;
   top: 0;
   width: calc(100% - 32px);
@@ -21,7 +22,7 @@ export const NavBar = styled.div`
   flex-direction: row;
   align-items: center;
   text-align: center;
-  height: 70px;
+  height: 65px;
   border-bottom: 1px solid black;
   background-color: white;
 `;

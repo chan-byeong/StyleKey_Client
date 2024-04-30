@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useStore } from '../../store/auth.tsx';
 
@@ -5,13 +6,12 @@ import Login from './LoginAuth.tsx';
 import * as He from './styles/Header.styles.tsx';
 import FavoriteButtonLogo from './images/FavoriteButton.svg';
 import BackButton from './images/backbutton.svg';
+import menuBtn_img from './images/Hamburgerbutton.svg';
 import { Text } from '../common/Common.tsx';
 
-interface Paths {
-  [key: string]: string;
-}
+import SideBar from './SideBar.tsx';
 
-const PATH_CONVERT: Paths = {
+const PATH_CONVERT: { [key: string]: string } = {
   '/login': '로그인',
   '/teststart': '패션 유형 테스트',
   '/test': '패션 유형 테스트',
@@ -20,10 +20,15 @@ const PATH_CONVERT: Paths = {
 };
 
 function Header() {
+  const [isOpen, setIsOpen] = useState(false);
   const { auth } = useStore();
   const navigate = useNavigate();
   const location = useLocation();
   const pathName: string = location.pathname;
+
+  const toggleSidebar = () => {
+    setIsOpen((pre) => !pre);
+  };
 
   function headerMain() {
     if (PATH_CONVERT[pathName] === undefined) {
@@ -35,10 +40,15 @@ function Header() {
 
   return (
     <>
-      <He.NavBar2></He.NavBar2>
+      {/* <He.NavBar2></He.NavBar2> */}
       <He.NavBar>
+        <SideBar isOpen={isOpen} toggleSlider={toggleSidebar} />
         <He.LeftSection>
-          {pathName === '/' ? null : (
+          {pathName === '/' ? (
+            <He.HeaderButtons onClick={toggleSidebar}>
+              <img src={menuBtn_img} alt="메뉴 버튼" />
+            </He.HeaderButtons>
+          ) : (
             <He.HeaderButtons onClick={() => navigate(-1)}>
               <img src={BackButton} alt="뒤로가기 버튼" />
             </He.HeaderButtons>
