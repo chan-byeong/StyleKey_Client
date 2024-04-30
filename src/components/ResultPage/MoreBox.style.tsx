@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Box = styled.div`
   width: 100%;
-  margin-top: 24px;
+  margin-bottom: 24px;
   border-radius: 12px;
   padding: 25px 19px;
   background: var(--White, #fff);
@@ -15,8 +15,6 @@ export const Box = styled.div`
 `;
 
 export const ImgWrapper = styled.div<{}>`
-  width: 170px;
-  height: 210px;
-  background-color: #d1d1f8;
+  width: 179px;
   margin: 12px 0;
 `;

@@ -8,7 +8,7 @@ import Homepage from './pages/Homepage.tsx';
 import RedirectPage from './components/loginpage/Redirect.tsx';
 import LoginPage from './pages/LoginPage.tsx';
 import Mypage from './pages/Mypage.tsx';
-import ResultPage from './pages/ResultPage.tsx';
+import NewResultPage from './pages/NewResultPage.tsx';
 import TestStartPage from './pages/TestStartpage.tsx';
 import TestPage from './pages/TestPage.tsx';
 
@@ -53,12 +53,12 @@ function App() {
               <Route path="/teststart" element={<TestStartPage />} />
               <Route path="/test" element={<TestPage />} />
               <Route path="/test_temp" element={<Tests />} />
-              <Route path="/result" element={<ResultPage />} />
-              <Route path="/points">
-                <Route path="/points/detail">
+              <Route path="/result" element={<NewResultPage />} />
+              {/* <Route path="/points">
+                <Route path="/points/detail/:point">
                   <Route path="/points/detail/cordinate" />
                 </Route>
-              </Route>
+              </Route> */}
               <Route path="/brands">
                 <Route path="/brands/detail" />
               </Route>

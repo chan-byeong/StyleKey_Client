@@ -1,14 +1,10 @@
-interface StylePoint {
-  id: number;
-}
-
 interface StylePointDetails {
   stylepoint: string;
   styledetail: string;
   details: string[];
 }
 
-const StylePointDetail = ({ id }: StylePoint): StylePointDetails | null => {
+const StylePointDetail = (id: number): StylePointDetails => {
   switch (id) {
     case 1:
       return {
@@ -111,7 +107,16 @@ const StylePointDetail = ({ id }: StylePoint): StylePointDetails | null => {
       };
 
     default:
-      return null;
+      return {
+        stylepoint: '액티브',
+        styledetail: '일상의 경계를\n허무는 스포티한',
+        details: [
+          '액티브 포인트는 편안한 스포츠웨어, 실용적인 아웃도어 아이템, 편안한 스니커즈 등을 활용하여 활동적인 라이프스타일을 표현하는 패션 유형입니다.',
+          '에슬래저룩이나, 고프코어룩이 이에 포함되며, 기능성을 중시한 디자인에서 건강과 레저를 위한 밝은 색상의 디자인에 이르기까지 활동적인 이미지를 표현한 스타일입니다.',
+          '또한, 액티브 포인트는 기능성을 중시하며, 편안하면서도 스타일리시한 룩을 선호합니다. 이는 기능성 패브릭, 레이어드 스타일링, 밝은 컬러의 아이템 등 다양한 방법으로 표현됩니다.',
+          '액티브 포인트는 스포츠를 좋아하거나 활동적인 라이프스타일을 가진 사람들에게 인기가 있으며, 일상에서도 편안하면서도 스타일리시하게 보이고 싶은 사람들에게 적합합니다.',
+        ],
+      };
   }
 };
 

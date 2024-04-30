@@ -37,7 +37,6 @@ export const StyleResultTypo = styled.span`
 
 export const ImgWrapper = styled.div`
   width: 100%;
-  height: 448px;
   margin-top: 14px;
 `;
 

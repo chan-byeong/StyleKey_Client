@@ -1,19 +1,19 @@
 import * as R from './styles/ResultPage.style';
 interface DescriptionProps {
-  styledetailLines?: string[];
+  styleDetail?: string;
   stylePoint?: string;
   details?: string[];
 }
 
 const Description: React.FC<DescriptionProps> = ({
-  styledetailLines,
+  styleDetail,
   stylePoint,
   details,
 }) => {
   return (
     <R.ContentsBox>
       <R.Title>
-        {styledetailLines?.join(' ')} "{stylePoint}"
+        {styleDetail} "{stylePoint}"
       </R.Title>
       <R.Line />
       <R.ListItemContainer>
